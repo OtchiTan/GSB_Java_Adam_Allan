@@ -11,7 +11,11 @@ import java.util.HashMap;
 
 public class MedicamentDao {
 
+<<<<<<< HEAD
 	public static Medicament rechercher(String codeMedecin){
+=======
+	public static Medicament rechercher(String medDepotLegal){
+>>>>>>> main
 		Medicament unMedicament=null;
 		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from MEDICAMENT where MED_DEPOTLEGAL ='"+medDepotLegal+"'");
 		try {
