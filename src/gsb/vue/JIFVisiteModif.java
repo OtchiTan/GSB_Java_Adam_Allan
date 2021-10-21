@@ -11,15 +11,15 @@ public class JIFVisiteModif extends JIFVisiteCons {
 		super(fenetreContainer);
 		JBmodif = new JButton("Modifier");
 		JBmodif.addActionListener(this);
-		
+
 		p.add(JBmodif);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-   		if (source == JBmodif){
-   			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer));
-   		}
+		if (source == JBmodif) {
+			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer));
+		}
 	}
 }

@@ -18,6 +18,7 @@ public class Medicament {
 	 * @param famCode
 	 * @param famLibelle
 	 */
+
 	public Medicament(String medDepotLegal, String nomCommercial, String medComposition, String medEffets,
 			float medPrixEchantillon, String famCode, String famLibelle) {
 		this.medDepotLegal = medDepotLegal;

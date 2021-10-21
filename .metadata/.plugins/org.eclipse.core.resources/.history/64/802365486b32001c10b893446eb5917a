@@ -1,0 +1,34 @@
+package gsb.vue;
+
+import gsb.modele.Medicament;
+
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class JIFMedicament extends JInternalFrame  {
+	private static final long serialVersionUID = 1L;
+	
+	protected JPanel p;  
+	protected JPanel pTexte;
+	protected JPanel pBoutons;
+	
+	protected JLabel JLmedDepotLegal;
+	protected JLabel JLmedComposition;
+	protected JLabel JLmedEffets;
+	protected JLabel JLmedPrixEchantillon;
+	protected JLabel JLfamCode;
+	protected JLabel JLfamLibelle;
+	
+	protected JTextField JTmedDepotLegal;
+	protected JTextField JTmedComposition;
+	protected JTextField JTmedEffets;
+	protected JTextField JTmedPrixEchantillon;
+	protected JTextField JTfamCode;
+	protected JTextField JTfamLibelle;
+}

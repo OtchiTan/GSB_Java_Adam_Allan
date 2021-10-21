@@ -20,6 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import gsb.modele.Medecin;
+import gsb.modele.Medicament;
 
 /**
  * @author Isabelle 22 févr. 2015 TODO Pour changer le modèle de ce commentaire
@@ -106,11 +107,11 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				case "Liste Medecins":
 					ouvrirFenetre(new JIFMedecinListeDic(this));
 					break;
-				case "Consultation Medicament":
+				case "Consultation Test":
 					ouvrirFenetre(new JIFMedecinCons());
 					break;
 				case "Ajout Medicament":
-					ouvrirFenetre(new JIFMedecinCons());
+					ouvrirFenetre(new JIFMedicamentAjout());
 					break;
 				case "Consultation Visite":
 					ouvrirFenetre(new JIFVisiteListe(this));
@@ -121,6 +122,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				case "Modification Visite":
 					ouvrirFenetre(new JIFVisiteModif(this));
 					break;
+				
 			}
 		}
 	}

@@ -14,8 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import com.mysql.cj.xdevapi.Table;
-
 import gsb.modele.Medecin;
 
 public class JIFVisiteListe extends JInternalFrame implements ActionListener {
