@@ -9,14 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
-public class JIFVisiteCons extends JInternalFrame implements ActionListener {
+public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
+
 	protected JPanel p;
-	
-	protected MenuPrincipal fenetreContainer;
-	
+
 	protected JLabel JLreference;
 	protected JLabel JLdate;
 	protected JLabel JLcommentaire;
@@ -29,12 +27,11 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 	protected JTextField JTmatricule;
 	protected JTextField JTcode;
 	
-	protected JTable JTstocker;
+	protected JButton JBajout;
 	
-	public JIFVisiteCons(MenuPrincipal uneFenetreContainer) {
+	public JIFVisiteAjout() {
 		p = new JPanel(new GridLayout(6,1));
 		
-		fenetreContainer = uneFenetreContainer;
 
 		JLreference = new JLabel("Référence");
 		p.add(JLreference);
@@ -59,16 +56,18 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 		JLcode = new JLabel("Code");
 		p.add(JLcode);
 		JTcode = new JTextField();
-		p.add(JTcode);		
+		p.add(JTcode);
+		
+		JBajout = new JButton("Ajouter");
+		p.add(JBajout);
 		
 		Container contentPane = getContentPane();
 		contentPane.add(p);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
-	
-	
 }

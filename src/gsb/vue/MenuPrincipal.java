@@ -19,6 +19,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import gsb.modele.Medecin;
+
 /**
  * @author Isabelle 22 févr. 2015 TODO Pour changer le modèle de ce commentaire
  *         de type généré, allez à : Fenêtre - Préférences - Java - Style de
@@ -74,11 +76,14 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
 		mVisites = new JMenu("Visites");
 		JMenuItem mA1 = new JMenuItem("Consultation Visite");
-		mE1.addActionListener(this); // installation d'un écouteur d'action
+		mA1.addActionListener(this); // installation d'un écouteur d'action
 		mVisites.add(mA1);
 		JMenuItem mA2 = new JMenuItem("Ajout Visite");
 		mA2.addActionListener(this);
 		mVisites.add(mA2);
+		JMenuItem mA3 = new JMenuItem("Modification Visite");
+		mA3.addActionListener(this);
+		mVisites.add(mA3);
 
 		mbar.add(mMedecins);
 		mbar.add(mMedicaments);
@@ -93,17 +98,31 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		// TODO Raccord de méthode auto-généré
 		if (evt.getSource() instanceof JMenuItem) {
 			String ChoixOption = evt.getActionCommand();
-
-			if (ChoixOption.equals("Consultation Medecin")) {
-				// Creation d'une sous-fenêtre
-				ouvrirFenetre(new JIFMedecinCons());
-
-			} else if (ChoixOption.equals("Liste Medecins")) {
-				ouvrirFenetre(new JIFMedecinListeDic(this));
+			
+			switch (ChoixOption) {
+				case "Consultation Medecin":
+					ouvrirFenetre(new JIFMedecinCons());
+					break;
+				case "Liste Medecins":
+					ouvrirFenetre(new JIFMedecinListeDic(this));
+					break;
+				case "Consultation Medicament":
+					ouvrirFenetre(new JIFMedecinCons());
+					break;
+				case "Ajout Medicament":
+					ouvrirFenetre(new JIFMedecinCons());
+					break;
+				case "Consultation Visite":
+					ouvrirFenetre(new JIFVisiteListe(this));
+					break;
+				case "Ajout Visite":
+					ouvrirFenetre(new JIFVisiteAjout());
+					break;
+				case "Modification Visite":
+					ouvrirFenetre(new JIFVisiteModif(this));
+					break;
 			}
-
 		}
-
 	}
 
 	public void ouvrirFenetre(JInternalFrame uneFenetre) {

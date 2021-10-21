@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 
 import com.mysql.cj.xdevapi.Table;
 
+import gsb.modele.Medecin;
+
 public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 
 	protected JPanel p;
@@ -30,11 +32,15 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 	protected JTextField JTcode;
 	protected JTextField JTdate;
 	protected JTextField JTreference;
+	protected MenuPrincipal fenetreContainer;
 	
 	protected JButton JBvisite;
 	protected JTable JTliste;
 	
-	public JIFVisiteListe() {
+	public JIFVisiteListe(MenuPrincipal uneFenetreContainer) {
+		
+		fenetreContainer = uneFenetreContainer;
+		
 		p = new JPanel(new GridLayout(3,1));
 		pInputs = new JPanel(new GridLayout(2,2));
 		p.add(pInputs);
@@ -80,8 +86,10 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Test");
-		
+		Object source = e.getSource();
+   		if (source == JBvisite){
+   			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer));
+   		}
 	}
 
 }
