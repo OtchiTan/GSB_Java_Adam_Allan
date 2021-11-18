@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -15,6 +18,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import gsb.modele.Medecin;
+import gsb.modele.Visite;
+import gsb.modele.dao.VisiteDao;
 
 public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 
@@ -31,6 +36,8 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 	protected JTextField JTdate;
 	protected JTextField JTreference;
 	protected MenuPrincipal fenetreContainer;
+	
+	TreeMap<String, Visite> lesVisites;
 	
 	protected JButton JBvisite;
 	protected JTable JTliste;
@@ -57,10 +64,18 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 		JTdate = new JTextField();
 		pInputs.add(JTdate);
 		
-		String[][] lignes = new String[2][3];
-		lignes[0][0] = "Test";
-		lignes[0][1] = "Test";
-		lignes[0][2] = "Test";
+		lesVisites = VisiteDao.retournerLesVisites();
+		
+		String[][] lignes = new String[lesVisites.size()][3];
+		
+		int i = 0;
+		for (Map.Entry<String, Visite> uneEntree : lesVisites.entrySet()) {
+			lignes[i][0] = uneEntree.getValue().getReference();
+			lignes[i][1] = uneEntree.getValue().getMedecin().getCodeMed();
+			lignes[i][2] = uneEntree.getValue().getMedecin().getAdresse();
+			i++;
+		}
+		
 		String[] columnsName = {"Référence","Code medecin","Lieu"};
 		JTliste = new JTable(lignes,columnsName);
 		JTliste.getSelectionModel().addListSelectionListener(JTliste);
@@ -86,7 +101,9 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
    		if (source == JBvisite){
-   			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer));
+   			if(lesVisites.containsKey(JTreference.getText())) {
+   	   			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, JTreference.getText()));   				
+   			}
    		}
 	}
 

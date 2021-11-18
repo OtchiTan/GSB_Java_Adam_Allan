@@ -8,7 +8,7 @@ public class JIFVisiteModif extends JIFVisiteCons {
 	protected JButton JBmodif;
 
 	public JIFVisiteModif(MenuPrincipal fenetreContainer) {
-		super(fenetreContainer);
+		super(fenetreContainer, "");
 		JBmodif = new JButton("Modifier");
 		JBmodif.addActionListener(this);
 
@@ -19,7 +19,7 @@ public class JIFVisiteModif extends JIFVisiteCons {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == JBmodif) {
-			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer));
+			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, ""));
 		}
 	}
 }

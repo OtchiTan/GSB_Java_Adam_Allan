@@ -1,6 +1,7 @@
 package gsb.modele.dao;
 
 import java.sql.ResultSet;
+import java.util.TreeMap;
 import gsb.modele.Visite;
 
 public class VisiteDao {
@@ -12,7 +13,7 @@ public class VisiteDao {
 		String commentaire = uneVisite.getCommentaire();
 		String codeMed = uneVisite.getMedecin().getCodeMed();
 		String matricule = uneVisite.getVisiteur().getMatricule();
-		requeteInsertion = "insert into CLIENT values('" + reference + "','" + date + "','" + commentaire + "','"
+		requeteInsertion = "insert into VISITE values('" + reference + "','" + date + "','" + commentaire + "','"
 				+ matricule + "','" + codeMed + "')";
 		try {
 			result = ConnexionMySql.execReqMaj(requeteInsertion);
@@ -26,7 +27,7 @@ public class VisiteDao {
 	public static Visite rechercher(String reference) {
 		Visite uneVisite = null;
 		ResultSet reqSelection = ConnexionMySql
-				.execReqSelection("select * from CLIENT where codeClient='" + reference + "'");
+				.execReqSelection("select * from VISITE where REFERENCE='" + reference + "'");
 		try {
 			if (reqSelection.next()) {
 				uneVisite = new Visite(reqSelection.getString("REFERENCE"), reqSelection.getString("DATEVISITE"),
@@ -40,5 +41,22 @@ public class VisiteDao {
 		}
 		ConnexionMySql.fermerConnexionBd();
 		return uneVisite;
+	}
+	
+	public static TreeMap<String, Visite> retournerLesVisites(){
+		TreeMap<String, Visite> lesVisites = new TreeMap<String,Visite>();
+		
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("SELECT * FROM VISITE");
+		
+		try {
+			while(reqSelection.next()) {
+				Visite uneVisite = VisiteDao.rechercher(reqSelection.getString(1));
+				lesVisites.put(uneVisite.getReference(), uneVisite);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return lesVisites;
 	}
 }

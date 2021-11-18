@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import gsb.modele.Visite;
+import gsb.modele.dao.VisiteDao;
+
 public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 	protected JPanel p;
 
@@ -31,34 +34,36 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 
 	protected JTable JTstocker;
 
-	public JIFVisiteCons(MenuPrincipal uneFenetreContainer) {
+	public JIFVisiteCons(MenuPrincipal uneFenetreContainer, String reference) {
 		p = new JPanel(new GridLayout(6, 1));
 
 		fenetreContainer = uneFenetreContainer;
+		
+		Visite uneVisite = VisiteDao.rechercher(reference);
 
 		JLreference = new JLabel("Référence");
 		p.add(JLreference);
-		JTreference = new JTextField();
+		JTreference = new JTextField(uneVisite.getReference());
 		p.add(JTreference);
 
 		JLdate = new JLabel("Date Visite");
 		p.add(JLdate);
-		JTdate = new JTextField();
+		JTdate = new JTextField(uneVisite.getDate());
 		p.add(JTdate);
 
 		JLcommentaire = new JLabel("Commentaire");
 		p.add(JLcommentaire);
-		JTcommentaire = new JTextField();
+		JTcommentaire = new JTextField(uneVisite.getCommentaire());
 		p.add(JTcommentaire);
 
 		JLmatricule = new JLabel("Matricule");
 		p.add(JLmatricule);
-		JTmatricule = new JTextField();
+		JTmatricule = new JTextField(uneVisite.getVisiteur().getMatricule());
 		p.add(JTmatricule);
 
 		JLcode = new JLabel("Code");
 		p.add(JLcode);
-		JTcode = new JTextField();
+		JTcode = new JTextField(uneVisite.getMedecin().getCodeMed());
 		p.add(JTcode);
 
 		Container contentPane = getContentPane();
