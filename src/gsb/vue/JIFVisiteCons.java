@@ -31,11 +31,18 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 	protected JTextField JTcommentaire;
 	protected JTextField JTmatricule;
 	protected JTextField JTcode;
+	
+	protected JButton JBmodif;
 
+	protected String reference;
+	
 	protected JTable JTstocker;
 
 	public JIFVisiteCons(MenuPrincipal uneFenetreContainer, String reference) {
-		p = new JPanel(new GridLayout(6, 1));
+		
+		this.reference = reference;
+		
+		p = new JPanel(new GridLayout(7, 1));
 
 		fenetreContainer = uneFenetreContainer;
 		
@@ -65,6 +72,10 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 		p.add(JLcode);
 		JTcode = new JTextField(uneVisite.getMedecin().getCodeMed());
 		p.add(JTcode);
+		
+		JBmodif = new JButton("Modifier");
+		JBmodif.addActionListener(this);
+		p.add(JBmodif);
 
 		Container contentPane = getContentPane();
 		contentPane.add(p);
@@ -72,7 +83,10 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		Object source = e.getSource();
+		if (source == JBmodif) {
+			fenetreContainer.ouvrirFenetre(new JIFVisiteModif(fenetreContainer, reference));
+		}
 	}
 
 }

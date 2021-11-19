@@ -11,6 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.sun.tools.javac.tree.JCTree.JCBreak;
+
+import gsb.modele.Visite;
+
 public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 
 	protected JPanel p;
@@ -66,7 +70,10 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		Object source = e.getSource();
+		if (source == JBajout) {
+			
+		}
 
 	}
 }
