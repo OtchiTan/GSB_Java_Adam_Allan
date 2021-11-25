@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -12,8 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import gsb.modele.Medecin;
 import gsb.modele.Visite;
+import gsb.modele.Visiteur;
+import gsb.modele.dao.MedecinDao;
 import gsb.modele.dao.VisiteDao;
+import gsb.modele.dao.VisiteurDao;
 
 public class JIFVisiteModif extends JInternalFrame implements ActionListener{
 	protected JPanel p;
@@ -86,6 +91,17 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == JBvalide) {
+			String reference = JTreference.getText();
+			String date = JTdate.getText();
+			String commentaire = JTcommentaire.getText();
+			String codeMed = JTcode.getText();
+			String matricule = JTmatricule.getText();
+			Medecin medecin = MedecinDao.rechercher(codeMed);
+			Visiteur visiteur = VisiteurDao.rechercher(matricule);
+			Visite visite = new Visite(reference, date, commentaire, medecin, visiteur);
+			
+			VisiteDao.modifierVisite(visite);
+			
 			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, reference));
 		}
 	}

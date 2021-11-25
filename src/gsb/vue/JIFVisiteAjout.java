@@ -11,9 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.sun.tools.javac.tree.JCTree.JCBreak;
-
+import gsb.modele.Medecin;
 import gsb.modele.Visite;
+import gsb.modele.Visiteur;
+import gsb.modele.dao.MedecinDao;
+import gsb.modele.dao.VisiteDao;
+import gsb.modele.dao.VisiteurDao;
 
 public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 
@@ -62,6 +65,7 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 		p.add(JTcode);
 
 		JBajout = new JButton("Ajouter");
+		JBajout.addActionListener(this);
 		p.add(JBajout);
 
 		Container contentPane = getContentPane();
@@ -72,7 +76,16 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == JBajout) {
+			String reference = JTreference.getText();
+			String date = JTdate.getText();
+			String commentaire = JTcommentaire.getText();
+			String codeMed = JTcode.getText();
+			String matricule = JTmatricule.getText();
+			Medecin medecin = MedecinDao.rechercher(codeMed);
+			Visiteur visiteur = VisiteurDao.rechercher(matricule);
+			Visite visite = new Visite(reference, date, commentaire, medecin, visiteur);
 			
+			VisiteDao.creer(visite);
 		}
 
 	}

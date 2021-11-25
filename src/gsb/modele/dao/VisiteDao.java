@@ -59,4 +59,19 @@ public class VisiteDao {
 		
 		return lesVisites;
 	}
+	
+	public static int modifierVisite(Visite visite) {
+		int result = 0;
+		
+		String requete = "UPDATE `VISITE` SET `COMMENTAIRE` = '"+visite.getCommentaire()+"', "
+				+ "WHERE REFERENCE = '"+visite.getReference()+"'";
+		
+		try {
+			result = ConnexionMySql.execReqMaj(requete);
+		} catch (Exception e) {
+			System.out.println("echec insertion Client");
+		}
+		ConnexionMySql.fermerConnexionBd();
+		return result;
+	}
 }
