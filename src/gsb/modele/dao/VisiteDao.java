@@ -63,8 +63,7 @@ public class VisiteDao {
 	public static int modifierVisite(Visite visite) {
 		int result = 0;
 		
-		String requete = "UPDATE `VISITE` SET `COMMENTAIRE` = '"+visite.getCommentaire()+"', "
-				+ "WHERE REFERENCE = '"+visite.getReference()+"'";
+		String requete = "UPDATE `VISITE` SET `COMMENTAIRE` = '"+visite.getCommentaire()+"' WHERE REFERENCE = '"+visite.getReference()+"'";
 		
 		try {
 			result = ConnexionMySql.execReqMaj(requete);
