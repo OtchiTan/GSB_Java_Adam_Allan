@@ -103,11 +103,15 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener{
 		lesOffres = OffrirDao.rertournerOffre(uneVisite.getReference());
 		
 		String[][] lignes = new String[lesOffres.size()][2];
-		
-		lignes[0][0] = lesOffres.get(0).getUnMedicament().getMedDepotLegal();
-		lignes[0][1] = String.valueOf(lesOffres.get(0).getQteOfferte());	
-		lignes[1][0] = lesOffres.get(1).getUnMedicament().getMedDepotLegal();
-		lignes[1][1] = String.valueOf(lesOffres.get(1).getQteOfferte());
+
+		if (lesOffres.size() == 1) {
+			lignes[0][0] = lesOffres.get(0).getUnMedicament().getMedDepotLegal();
+			lignes[0][1] = String.valueOf(lesOffres.get(0).getQteOfferte());
+		}
+		if (lesOffres.size() == 2) {
+			lignes[1][0] = lesOffres.get(1).getUnMedicament().getMedDepotLegal();
+			lignes[1][1] = String.valueOf(lesOffres.get(1).getQteOfferte());
+		}
 
 		String[] columnsName = {"Dépot légal","Quantité"};
 		JToffres = new JTable(lignes,columnsName);

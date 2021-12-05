@@ -41,13 +41,9 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 	protected JTextField JTcode;
 	
 	protected JButton JBmodif;
+	protected JButton JBoffres;
 
 	protected String reference;
-	
-	protected JTable JToffres;
-	protected JPanel JPoffres;
-
-	protected ArrayList<Offrir> lesOffres;
 	
 	public JIFVisiteCons(MenuPrincipal uneFenetreContainer, String reference) {
 		
@@ -59,7 +55,7 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 		
 		Visite uneVisite = VisiteDao.rechercher(reference);
 
-		JLreference = new JLabel("Référence");
+		JLreference = new JLabel("Rï¿½fï¿½rence");
 		p.add(JLreference);
 		JTreference = new JTextField(uneVisite.getReference());
 		JTreference.setEditable(false);
@@ -88,33 +84,13 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 		JTcode = new JTextField(uneVisite.getMedecin().getCodeMed());
 		JTcode.setEditable(false);
 		p.add(JTcode);
-		
+
+		JBoffres = new JButton("Offres");
+		JBoffres.addActionListener(this);
+		p.add(JBoffres);
+
 		JBmodif = new JButton("Modifier");
 		JBmodif.addActionListener(this);
-		
-		JPanel listPanel = new JPanel();
-		
-		lesOffres = OffrirDao.rertournerOffre(uneVisite.getReference());
-		
-		String[][] lignes = new String[lesOffres.size()][2];
-		
-		lignes[0][0] = lesOffres.get(0).getUnMedicament().getMedDepotLegal();
-		lignes[0][1] = String.valueOf(lesOffres.get(0).getQteOfferte());	
-		lignes[1][0] = lesOffres.get(1).getUnMedicament().getMedDepotLegal();
-		lignes[1][1] = String.valueOf(lesOffres.get(1).getQteOfferte());
-			
-		String[] columnsName = {"Dépot légal","Quantité"};
-		JToffres = new JTable(lignes,columnsName);
-		JToffres.getSelectionModel().addListSelectionListener(JToffres);
-		
-		JScrollPane scrollPane = new JScrollPane(JToffres);
-		scrollPane.setPreferredSize(new Dimension(400, 200));
-		
-		listPanel.add(scrollPane);
-		
-		JPoffres = new JPanel();
-		JPoffres.add(JToffres);
-		p.add(JPoffres);
 		p.add(JBmodif);
 
 		Container contentPane = getContentPane();
@@ -126,6 +102,8 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 		Object source = e.getSource();
 		if (source == JBmodif) {
 			fenetreContainer.ouvrirFenetre(new JIFVisiteModif(fenetreContainer, reference));
+		} else if (source == JBoffres) {
+			fenetreContainer.ouvrirFenetre(new JIFGestionOffre(fenetreContainer, reference));
 		}
 	}
 
