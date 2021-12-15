@@ -25,17 +25,19 @@ public class OffrirDao {
 		return result;
 	}
 
-	public static ArrayList<Offrir> rertournerOffre(String reference){
-		ArrayList<Offrir> lesOffres = new ArrayList<Offrir>();
+	public static Offrir[] rertournerOffre(String reference){
+		Offrir[] lesOffres = {null,null};
 		
 		ResultSet reqSelection = ConnexionMySql.execReqSelection("SELECT * FROM OFFRIR WHERE REFERENCE = '"+reference+"'");
 		
 		try {
+			int i = 0;
 			while(reqSelection.next()) {
 				Medicament medicament = MedicamentDao.rechercher(reqSelection.getString(1));
 				Visite visite = VisiteDao.rechercher(reqSelection.getString(2));
 				Offrir offre = new Offrir(medicament, visite, reqSelection.getInt(3));
-				lesOffres.add(offre);
+				lesOffres[i] = offre;
+				i++;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +52,8 @@ public class OffrirDao {
 		String medDepot = offre.getUnMedicament().getMedDepotLegal();
 		String reference = offre.getUneVisite().getReference();
 		int quantite = offre.getQteOfferte();
-		requeteInsertion = "UPDATE `OFFRIR` SET `MED_DEPOTLEGAL` = '"+medDepot+"', `QUANTITE` = '"+quantite+"' WHERE MED_DEPOTLEGAL = '3MYC7' AND REFERENCE = 'v0001'";
+		requeteInsertion = "UPDATE `OFFRIR` SET `MED_DEPOTLEGAL` = '"+medDepot+"', `QUANTITE` = '"+quantite+
+				"' WHERE MED_DEPOTLEGAL = '"+medDepot+"' AND REFERENCE = '"+reference+"'";
 		try {
 			result = ConnexionMySql.execReqMaj(requeteInsertion);
 		} catch (Exception e) {

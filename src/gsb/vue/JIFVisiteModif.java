@@ -45,15 +45,8 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener{
 	protected JTextField JTcode;
 	
 	protected JButton JBvalide;
-	
-	protected JTable JToffres;
-	protected JPanel JPoffres;
 
 	protected String reference;
-	
-	protected JTable JTstocker;
-
-	protected ArrayList<Offrir> lesOffres;
 	
 	public JIFVisiteModif(MenuPrincipal fenetreContainer, String reference) {
 		
@@ -96,35 +89,6 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener{
 		
 		JBvalide = new JButton("Valider");
 		JBvalide.addActionListener(this);
-		p.add(JBvalide);
-		
-		JPanel listPanel = new JPanel();
-		
-		lesOffres = OffrirDao.rertournerOffre(uneVisite.getReference());
-		
-		String[][] lignes = new String[lesOffres.size()][2];
-
-		if (lesOffres.size() == 1) {
-			lignes[0][0] = lesOffres.get(0).getUnMedicament().getMedDepotLegal();
-			lignes[0][1] = String.valueOf(lesOffres.get(0).getQteOfferte());
-		}
-		if (lesOffres.size() == 2) {
-			lignes[1][0] = lesOffres.get(1).getUnMedicament().getMedDepotLegal();
-			lignes[1][1] = String.valueOf(lesOffres.get(1).getQteOfferte());
-		}
-
-		String[] columnsName = {"Dépot légal","Quantité"};
-		JToffres = new JTable(lignes,columnsName);
-		JToffres.getSelectionModel().addListSelectionListener(JToffres);
-		
-		JScrollPane scrollPane = new JScrollPane(JToffres);
-		scrollPane.setPreferredSize(new Dimension(400, 200));
-		
-		listPanel.add(scrollPane);
-		
-		JPoffres = new JPanel();
-		JPoffres.add(JToffres);
-		p.add(JPoffres);
 		p.add(JBvalide);
 
 		Container contentPane = getContentPane();

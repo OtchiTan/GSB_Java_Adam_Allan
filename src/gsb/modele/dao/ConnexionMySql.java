@@ -32,11 +32,11 @@ public class ConnexionMySql { // DAO = Data Access Object
 	 */
 	public static void connecterBd() {
 		// connexion à la base de donnée à partir de jdbc
-		String url = "jdbc:mysql://167.71.0.73:3306/gsbv3"; // url : chaine de connexion
+		String url = "jdbc:mysql://192.176.1.13:3306/gsbv3"; // url : chaine de connexion
 		// try permet d'essayer de lancer la connexion
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			cnx = DriverManager.getConnection(url, "otchi", "M83<<<LiSA");
+			cnx = DriverManager.getConnection(url, "admindb", "password");
 		}
 		// si la connexion echoue un message d'erreur est affiché
 		catch (Exception e) {
