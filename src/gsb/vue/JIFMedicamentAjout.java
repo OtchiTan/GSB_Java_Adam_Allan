@@ -31,7 +31,7 @@ public class JIFMedicamentAjout extends JInternalFrame implements ActionListener
 	protected JButton JBajout;
 
 	public JIFMedicamentAjout() {
-		p = new JPanel(new GridLayout(6, 1));
+		p = new JPanel(new GridLayout(7, 1));
 
 		JLmedDepotLegal = new JLabel("MedDepotlegal");
 		p.add(JLmedDepotLegal);

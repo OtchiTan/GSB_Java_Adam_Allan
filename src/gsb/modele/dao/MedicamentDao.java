@@ -45,4 +45,19 @@ public class MedicamentDao {
 		return collectionDesMedicaments;
 	}
 
+	public static HashMap<String, Medicament> retournerDictionnaireDesMedicaments() {
+		HashMap<String, Medicament> diccoDesMedicaments = new HashMap<String, Medicament>();
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select MED_DEPOTLEGAL from MEDICAMENT");
+		try {
+			while (reqSelection.next()) {
+				String medDepotLegal = reqSelection.getString(1);
+				diccoDesMedicaments.put(medDepotLegal, MedicamentDao.rechercher(medDepotLegal));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("erreur retournerDiccoDesMedicaments()");
+		}
+		return diccoDesMedicaments;
+
+	}
 }

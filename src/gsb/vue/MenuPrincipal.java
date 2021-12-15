@@ -96,7 +96,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		// TODO Raccord de méthode auto-généré
 		if (evt.getSource() instanceof JMenuItem) {
 			String ChoixOption = evt.getActionCommand();
-			
+
 			switch (ChoixOption) {
 				case "Consultation Medecin":
 					ouvrirFenetre(new JIFMedecinCons());
@@ -109,6 +109,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 					break;
 				case "Ajout Medicaments":
 					ouvrirFenetre(new JIFMedicamentAjout());
+					break;
+				case "Consultation Medicament":
+					ouvrirFenetre(new JIFMedicamentListeDic(this));
 					break;
 				case "Consultation Visite":
 					ouvrirFenetre(new JIFVisiteListe(this));
