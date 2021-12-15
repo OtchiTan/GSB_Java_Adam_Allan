@@ -52,9 +52,10 @@ public class OffrirDao {
 		String medDepot = offre.getUnMedicament().getMedDepotLegal();
 		String reference = offre.getUneVisite().getReference();
 		int quantite = offre.getQteOfferte();
-		requeteInsertion = "UPDATE `OFFRIR` SET `MED_DEPOTLEGAL` = '"+medDepot+"', `QUANTITE` = '"+quantite+
-				"' WHERE MED_DEPOTLEGAL = '"+medDepot+"' AND REFERENCE = '"+reference+"'";
+		requeteInsertion = "UPDATE `OFFRIR` SET `MED_DEPOTLEGAL` = '"+medDepot+"', `QUANTITE` = "+quantite+
+				" WHERE MED_DEPOTLEGAL = '"+medDepot+"' AND REFERENCE = '"+reference+"'";
 		try {
+			System.out.println(requeteInsertion);
 			result = ConnexionMySql.execReqMaj(requeteInsertion);
 		} catch (Exception e) {
 			System.out.println("echec insertion Client");

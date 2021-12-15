@@ -30,6 +30,7 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
 
     protected JButton JBannuler;
     protected JButton JBmodifier;
+    protected JButton JBajouter;
 
     protected JTable JTliste;
 
@@ -42,7 +43,7 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
         fenetreContainer = uneFenetreContainer;
         this.reference = reference;
 
-        p = new JPanel(new GridLayout(4,1));
+        p = new JPanel();
 
         JLreference = new JLabel("Reference");
         JTreference = new JTextField(reference);
@@ -50,18 +51,7 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
         p.add(JLreference);
         p.add(JTreference);
 
-        JPButtons = new JPanel();
-
-        JBannuler = new JButton("Annuler");
-        JBannuler.addActionListener(this);
-        JPButtons.add(JBannuler);
-        JBmodifier = new JButton("Modifier");
-        JBmodifier.addActionListener(this);
-        JPButtons.add(JBmodifier);
-
-        p.add(JPButtons);
-
-        JPAjout = new JPanel();
+        JPAjout = new JPanel(new GridLayout(1,3));
 
         JLdepot = new JLabel("Depot légal");
         JPAjout.add(JLdepot);
@@ -72,6 +62,10 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
         JPAjout.add(JLquantite);
         JTquantite = new JTextField();
         JPAjout.add(JTquantite);
+
+        JBajouter = new JButton("Ajouter");
+        JBajouter.addActionListener(this);
+        JPAjout.add(JBajouter);
 
         p.add(JPAjout);
 
@@ -93,6 +87,17 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
 
         p.add(JTliste);
 
+        JPButtons = new JPanel();
+
+        JBannuler = new JButton("Annuler");
+        JBannuler.addActionListener(this);
+        JPButtons.add(JBannuler);
+        JBmodifier = new JButton("Modifier");
+        JBmodifier.addActionListener(this);
+        JPButtons.add(JBmodifier);
+
+        p.add(JPButtons);
+
         Container contentPane = getContentPane();
         contentPane.add(p);
     }
@@ -102,6 +107,13 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
         Object source = e.getSource();
         if (source == JBannuler) {
             fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, reference));
+        } else if (source == JBajouter) {
+            Medicament medicament = MedicamentDao.rechercher(JTdepot.getText());
+            Visite visite = VisiteDao.rechercher(reference);
+            Offrir offre = new Offrir(medicament,visite,Integer.valueOf(JTquantite.getText()));
+
+            OffrirDao.creer(offre);
+            fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer,reference));
         } else if (source == JBmodifier) {
             Visite visite = VisiteDao.rechercher(reference);
 
@@ -111,12 +123,7 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
                 int quantiteUne = Integer.valueOf(JTliste.getValueAt(0, 1).toString());
                 Offrir offreUne = new Offrir(medicamentUn, visite, quantiteUne);
 
-                if (offrirs[0] == null) {
-                    System.out.println("Creer");
-                    OffrirDao.creer(offreUne);
-                } else {
-                    OffrirDao.modifier(offreUne);
-                }
+                OffrirDao.modifier(offreUne);
             }
 
             if (validOffre(1)) {
@@ -125,13 +132,7 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
                 int quantiteDeux = Integer.valueOf(JTliste.getValueAt(1, 1).toString());
                 Offrir offreDeux = new Offrir(medicamentDeux, visite, quantiteDeux);
 
-                
-                if (offrirs[1] == null) {
-                    System.out.println("Creer");
-                    OffrirDao.creer(offreDeux);
-                } else {
-                    OffrirDao.modifier(offreDeux);
-                }
+                OffrirDao.modifier(offreDeux);
             }
 
             fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, reference));

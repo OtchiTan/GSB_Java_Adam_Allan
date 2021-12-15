@@ -1,44 +1,39 @@
 package gsb.vue;
 
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import gsb.modele.Visite;
+import gsb.modele.dao.VisiteDao;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 import java.util.TreeMap;
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableRowSorter;
 
-import gsb.modele.Visite;
-import gsb.modele.dao.VisiteDao;
-
-public class JIFVisiteListe extends JInternalFrame implements ActionListener, ListSelectionListener {
+public class JIFVisiteListeParDate extends JInternalFrame implements ActionListener, ListSelectionListener {
 
 	protected JPanel p;
 	protected JPanel pInputs;
 	protected JPanel pList;
 	protected JPanel pButtons;
-	
+
 	protected JLabel JLcode;
 	protected JLabel JLdate;
 	protected JLabel JLreference;
-	
+
 	protected JTextField JTcode;
 	protected JTextField JTdate;
 	protected JTextField JTreference;
 	protected MenuPrincipal fenetreContainer;
-	
+
 	protected TreeMap<String, Visite> lesVisites;
-	
+
 	protected JButton JBvisite;
 	protected JTable JTliste;
-	
-	public JIFVisiteListe(MenuPrincipal uneFenetreContainer) {
+
+	public JIFVisiteListeParDate(MenuPrincipal uneFenetreContainer, String date) {
 		
 		fenetreContainer = uneFenetreContainer;
 		
@@ -62,7 +57,7 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener, Li
 		JTdate.addActionListener(this);
 		pInputs.add(JTdate);
 
-		lesVisites = VisiteDao.retournerLesVisites();
+		lesVisites = VisiteDao.rechercherParDate(date);
 
 		String[][] lignes = new String[lesVisites.size()][3];
 
@@ -94,16 +89,16 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener, Li
 		Container contentPane = getContentPane();
 		contentPane.add(p);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-   		if (source == JBvisite){
-   			if(lesVisites.containsKey(JTreference.getText())) {
-   	   			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, JTreference.getText()));   				
-   			}
-   		} else if (source == JTcode){
-			   fenetreContainer.ouvrirFenetre(new JIFVisiteListeParCode(fenetreContainer,JTcode.getText()));
+		if (source == JBvisite){
+			if(lesVisites.containsKey(JTreference.getText())) {
+				fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, JTreference.getText()));
+			}
+		} else if (source == JTcode){
+			fenetreContainer.ouvrirFenetre(new JIFVisiteListeParCode(fenetreContainer,JTcode.getText()));
 		} else if (source == JTdate) {
 			fenetreContainer.ouvrirFenetre(new JIFVisiteListeParDate(fenetreContainer,JTdate.getText()));
 		}

@@ -73,4 +73,34 @@ public class VisiteDao {
 		ConnexionMySql.fermerConnexionBd();
 		return result;
 	}
+
+	public static TreeMap<String,Visite> rechercherParVisiteur(String matricule) {
+		TreeMap<String,Visite> visites = new TreeMap<String,Visite>();
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE where MATRICULE='" + matricule + "'");
+		try {
+			while(reqSelection.next()) {
+				Visite uneVisite = VisiteDao.rechercher(reqSelection.getString(1));
+				visites.put(uneVisite.getReference(), uneVisite);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ConnexionMySql.fermerConnexionBd();
+		return visites;
+	}
+
+	public static TreeMap<String,Visite> rechercherParDate(String date) {
+		TreeMap<String,Visite> visites = new TreeMap<String,Visite>();
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE where DATEVISITE='" + date + "'");
+		try {
+			while(reqSelection.next()) {
+				Visite uneVisite = VisiteDao.rechercher(reqSelection.getString(1));
+				visites.put(uneVisite.getReference(), uneVisite);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ConnexionMySql.fermerConnexionBd();
+		return visites;
+	}
 }
