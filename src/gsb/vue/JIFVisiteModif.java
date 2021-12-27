@@ -46,44 +46,42 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener{
 	
 	protected JButton JBvalide;
 
-	protected String reference;
+	protected Visite visite;
 	
-	public JIFVisiteModif(MenuPrincipal fenetreContainer, String reference) {
-		
-		this.reference = reference;
+	public JIFVisiteModif(MenuPrincipal fenetreContainer, Visite visite) {
 		
 		p = new JPanel(new GridLayout(7, 1));
 
 		this.fenetreContainer = fenetreContainer;
-		
-		Visite uneVisite = VisiteDao.rechercher(reference);
+
+		this.visite = visite;
 
 		JLreference = new JLabel("Référence");
 		p.add(JLreference);
-		JTreference = new JTextField(uneVisite.getReference());
+		JTreference = new JTextField(visite.getReference());
 		JTreference.setEditable(false);
 		p.add(JTreference);
 
 		JLdate = new JLabel("Date Visite");
 		p.add(JLdate);
-		JTdate = new JTextField(uneVisite.getDate());
+		JTdate = new JTextField(visite.getDate());
 		JTdate.setEditable(false);
 		p.add(JTdate);
 
 		JLcommentaire = new JLabel("Commentaire");
 		p.add(JLcommentaire);
-		JTcommentaire = new JTextField(uneVisite.getCommentaire());
+		JTcommentaire = new JTextField(visite.getCommentaire());
 		p.add(JTcommentaire);
 
 		JLmatricule = new JLabel("Matricule");
 		p.add(JLmatricule);
-		JTmatricule = new JTextField(uneVisite.getVisiteur().getMatricule());
+		JTmatricule = new JTextField(visite.getVisiteur().getMatricule());
 		JTmatricule.setEditable(false);
 		p.add(JTmatricule);
 
 		JLcode = new JLabel("Code");
 		p.add(JLcode);
-		JTcode = new JTextField(uneVisite.getMedecin().getCodeMed());
+		JTcode = new JTextField(visite.getMedecin().getCodeMed());
 		JTcode.setEditable(false);
 		p.add(JTcode);
 		
@@ -100,18 +98,11 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == JBvalide) {
-			String reference = JTreference.getText();
-			String date = JTdate.getText();
-			String commentaire = JTcommentaire.getText();
-			String codeMed = JTcode.getText();
-			String matricule = JTmatricule.getText();
-			Medecin medecin = MedecinDao.rechercher(codeMed);
-			Visiteur visiteur = VisiteurDao.rechercher(matricule);
-			Visite visite = new Visite(reference, date, commentaire, medecin, visiteur);
+			visite.setCommentaire(JTcommentaire.getText());
 			
 			VisiteDao.modifierVisite(visite);
 			
-			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, reference));
+			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, visite));
 		}
 	}
 }

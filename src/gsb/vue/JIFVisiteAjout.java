@@ -4,17 +4,16 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import gsb.modele.Medecin;
+import gsb.modele.Medicament;
 import gsb.modele.Visite;
 import gsb.modele.Visiteur;
 import gsb.modele.dao.MedecinDao;
+import gsb.modele.dao.MedicamentDao;
 import gsb.modele.dao.VisiteDao;
 import gsb.modele.dao.VisiteurDao;
 
@@ -31,8 +30,9 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 	protected JTextField JTreference;
 	protected JTextField JTdate;
 	protected JTextField JTcommentaire;
-	protected JTextField JTmatricule;
-	protected JTextField JTcode;
+
+	protected JComboBox JCBmatricule;
+	protected JComboBox JCBcode;
 
 	protected JButton JBajout;
 
@@ -43,6 +43,7 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 		p.add(JLreference);
 		JTreference = new JTextField();
 		p.add(JTreference);
+
 
 		JLdate = new JLabel("Date Visite");
 		p.add(JLdate);
@@ -56,13 +57,23 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 
 		JLmatricule = new JLabel("Matricule");
 		p.add(JLmatricule);
-		JTmatricule = new JTextField();
-		p.add(JTmatricule);
+		ArrayList<Visiteur> visiteurs = VisiteurDao.retournerLesVisiteurs();
+		String[] lesMatricules = new String[visiteurs.size()];
+		for (int i = 0; i < visiteurs.size(); i++) {
+			lesMatricules[i] = visiteurs.get(i).getMatricule();
+		}
+		JCBmatricule = new JComboBox(lesMatricules);
+		p.add(JCBmatricule);
 
 		JLcode = new JLabel("Code");
 		p.add(JLcode);
-		JTcode = new JTextField();
-		p.add(JTcode);
+		ArrayList<Medecin> medecins = MedecinDao.retournerCollectionDesMedecins();
+		String[] lesCodes = new String[medecins.size()];
+		for (int i = 0; i < medecins.size(); i++) {
+			lesCodes[i] = medecins.get(i).getCodeMed();
+		}
+		JCBcode = new JComboBox(lesCodes);
+		p.add(JCBcode);
 
 		JBajout = new JButton("Ajouter");
 		JBajout.addActionListener(this);
@@ -79,8 +90,8 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 			String reference = JTreference.getText();
 			String date = JTdate.getText();
 			String commentaire = JTcommentaire.getText();
-			String codeMed = JTcode.getText();
-			String matricule = JTmatricule.getText();
+			String codeMed = JCBcode.getSelectedItem().toString();
+			String matricule = JCBmatricule.getSelectedItem().toString();
 			Medecin medecin = MedecinDao.rechercher(codeMed);
 			Visiteur visiteur = VisiteurDao.rechercher(matricule);
 			Visite visite = new Visite(reference, date, commentaire, medecin, visiteur);

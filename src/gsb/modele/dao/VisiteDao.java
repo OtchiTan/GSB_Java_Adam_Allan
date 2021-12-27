@@ -76,7 +76,7 @@ public class VisiteDao {
 
 	public static TreeMap<String,Visite> rechercherParVisiteur(String matricule) {
 		TreeMap<String,Visite> visites = new TreeMap<String,Visite>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE where MATRICULE='" + matricule + "'");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE where MATRICULE like '%" + matricule + "%'");
 		try {
 			while(reqSelection.next()) {
 				Visite uneVisite = VisiteDao.rechercher(reqSelection.getString(1));
@@ -91,7 +91,7 @@ public class VisiteDao {
 
 	public static TreeMap<String,Visite> rechercherParDate(String date) {
 		TreeMap<String,Visite> visites = new TreeMap<String,Visite>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE where DATEVISITE='" + date + "'");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("SELECT * FROM VISITE WHERE DATEVISITE LIKE '%"+date+"%'");
 		try {
 			while(reqSelection.next()) {
 				Visite uneVisite = VisiteDao.rechercher(reqSelection.getString(1));

@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class JIFGestionOffre extends JInternalFrame implements ActionListener {
     protected JPanel p;
@@ -25,7 +26,7 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
 
 
     protected JTextField JTreference;
-    protected JTextField JTdepot;
+    protected JComboBox JCBdepot;
     protected JTextField JTquantite;
 
     protected JButton JBannuler;
@@ -36,17 +37,18 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
 
     protected Offrir[] offrirs;
 
-    protected String reference;
+    protected Visite visite;
 
-    public JIFGestionOffre(MenuPrincipal uneFenetreContainer, String reference) {
+    public JIFGestionOffre(MenuPrincipal uneFenetreContainer, Visite visite) {
 
         fenetreContainer = uneFenetreContainer;
-        this.reference = reference;
 
         p = new JPanel();
 
+        this.visite = visite;
+
         JLreference = new JLabel("Reference");
-        JTreference = new JTextField(reference);
+        JTreference = new JTextField(visite.getReference());
         JTreference.setEditable(false);
         p.add(JLreference);
         p.add(JTreference);
@@ -55,8 +57,13 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
 
         JLdepot = new JLabel("Depot légal");
         JPAjout.add(JLdepot);
-        JTdepot = new JTextField();
-        JPAjout.add(JTdepot);
+        ArrayList<Medicament> medicaments = MedicamentDao.retournerCollectionDesMedicaments();
+        String[] lesDepots = new String[medicaments.size()];
+        for (int i = 0; i < medicaments.size(); i++) {
+            lesDepots[i] = medicaments.get(i).getMedDepotLegal();
+        }
+        JCBdepot = new JComboBox(lesDepots);
+        JPAjout.add(JCBdepot);
 
         JLquantite = new JLabel("Quantite");
         JPAjout.add(JLquantite);
@@ -69,7 +76,7 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
 
         p.add(JPAjout);
 
-        offrirs = OffrirDao.rertournerOffre(reference);
+        offrirs = OffrirDao.rertournerOffre(visite.getReference());
         String[] columnsName = {"Depot Legal", "Quantite"};
         String[][] lignes = new String[2][2];
 
@@ -106,17 +113,14 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == JBannuler) {
-            fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, reference));
+            fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, visite));
         } else if (source == JBajouter) {
-            Medicament medicament = MedicamentDao.rechercher(JTdepot.getText());
-            Visite visite = VisiteDao.rechercher(reference);
+            Medicament medicament = MedicamentDao.rechercher(JCBdepot.getSelectedItem().toString());
             Offrir offre = new Offrir(medicament,visite,Integer.valueOf(JTquantite.getText()));
 
             OffrirDao.creer(offre);
-            fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer,reference));
+            fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer,visite));
         } else if (source == JBmodifier) {
-            Visite visite = VisiteDao.rechercher(reference);
-
             if (validOffre(0)) {
                 String referenceUne = JTliste.getValueAt(0, 0).toString();
                 Medicament medicamentUn = MedicamentDao.rechercher(referenceUne);
@@ -135,7 +139,7 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
                 OffrirDao.modifier(offreDeux);
             }
 
-            fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, reference));
+            fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, visite));
         }
     }
 

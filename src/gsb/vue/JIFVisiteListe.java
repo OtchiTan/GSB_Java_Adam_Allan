@@ -100,7 +100,7 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener, Li
 		Object source = e.getSource();
    		if (source == JBvisite){
    			if(lesVisites.containsKey(JTreference.getText())) {
-   	   			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, JTreference.getText()));   				
+   	   			fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, lesVisites.get(JTreference.getText())));
    			}
    		} else if (source == JTcode){
 			   fenetreContainer.ouvrirFenetre(new JIFVisiteListeParCode(fenetreContainer,JTcode.getText()));

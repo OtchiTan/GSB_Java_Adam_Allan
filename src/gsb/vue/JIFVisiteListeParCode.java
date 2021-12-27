@@ -95,7 +95,7 @@ public class JIFVisiteListeParCode extends JInternalFrame implements ActionListe
 		Object source = e.getSource();
 		if (source == JBvisite){
 			if(lesVisites.containsKey(JTreference.getText())) {
-				fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, JTreference.getText()));
+				fenetreContainer.ouvrirFenetre(new JIFVisiteCons(fenetreContainer, lesVisites.get(JTreference.getText())));
 			}
 		} else if (source == JTcode){
 			fenetreContainer.ouvrirFenetre(new JIFVisiteListeParCode(fenetreContainer,JTcode.getText()));

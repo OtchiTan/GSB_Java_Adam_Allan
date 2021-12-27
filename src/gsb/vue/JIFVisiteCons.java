@@ -43,45 +43,43 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 	protected JButton JBmodif;
 	protected JButton JBoffres;
 
-	protected String reference;
+	protected Visite visite;
 	
-	public JIFVisiteCons(MenuPrincipal uneFenetreContainer, String reference) {
-		
-		this.reference = reference;
+	public JIFVisiteCons(MenuPrincipal uneFenetreContainer, Visite visite) {
 		
 		p = new JPanel(new GridLayout(7, 1));
 
 		fenetreContainer = uneFenetreContainer;
-		
-		Visite uneVisite = VisiteDao.rechercher(reference);
+
+		this.visite = visite;
 
 		JLreference = new JLabel("R�f�rence");
 		p.add(JLreference);
-		JTreference = new JTextField(uneVisite.getReference());
+		JTreference = new JTextField(visite.getReference());
 		JTreference.setEditable(false);
 		p.add(JTreference);
 
 		JLdate = new JLabel("Date Visite");
 		p.add(JLdate);
-		JTdate = new JTextField(uneVisite.getDate());
+		JTdate = new JTextField(visite.getDate());
 		JTdate.setEditable(false);
 		p.add(JTdate);
 
 		JLcommentaire = new JLabel("Commentaire");
 		p.add(JLcommentaire);
-		JTcommentaire = new JTextField(uneVisite.getCommentaire());
+		JTcommentaire = new JTextField(visite.getCommentaire());
 		JTcommentaire.setEditable(false);
 		p.add(JTcommentaire);
-
+		
 		JLmatricule = new JLabel("Matricule");
 		p.add(JLmatricule);
-		JTmatricule = new JTextField(uneVisite.getVisiteur().getMatricule());
+		JTmatricule = new JTextField(visite.getVisiteur().getMatricule());
 		JTmatricule.setEditable(false);
 		p.add(JTmatricule);
 
 		JLcode = new JLabel("Code");
 		p.add(JLcode);
-		JTcode = new JTextField(uneVisite.getMedecin().getCodeMed());
+		JTcode = new JTextField(visite.getMedecin().getCodeMed());
 		JTcode.setEditable(false);
 		p.add(JTcode);
 
@@ -101,9 +99,9 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == JBmodif) {
-			fenetreContainer.ouvrirFenetre(new JIFVisiteModif(fenetreContainer, reference));
+			fenetreContainer.ouvrirFenetre(new JIFVisiteModif(fenetreContainer, visite));
 		} else if (source == JBoffres) {
-			fenetreContainer.ouvrirFenetre(new JIFGestionOffre(fenetreContainer, reference));
+			fenetreContainer.ouvrirFenetre(new JIFGestionOffre(fenetreContainer, visite));
 		}
 	}
 

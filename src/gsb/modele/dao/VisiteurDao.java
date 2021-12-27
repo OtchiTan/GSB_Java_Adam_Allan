@@ -1,7 +1,10 @@
 package gsb.modele.dao;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.TreeMap;
 
+import gsb.modele.Visite;
 import gsb.modele.Visiteur;
 
 public class VisiteurDao {
@@ -20,5 +23,22 @@ public class VisiteurDao {
             }
         ConnexionMySql.fermerConnexionBd();
         return unVisiteur;
+    }
+
+    public static ArrayList<Visiteur> retournerLesVisiteurs(){
+        ArrayList<Visiteur> lesVisites = new ArrayList<Visiteur>();
+
+        ResultSet reqSelection = ConnexionMySql.execReqSelection("SELECT * FROM VISITEUR");
+
+        try {
+            while(reqSelection.next()) {
+                Visiteur visiteur = VisiteurDao.rechercher(reqSelection.getString(1));
+                lesVisites.add(visiteur);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lesVisites;
     }
 }
