@@ -4,7 +4,11 @@ import gsb.modele.Medicament;
 import gsb.modele.dao.MedicamentDao;
 
 public class MedicamentService {
-
+	/**
+	 *
+	 * @param medDepotLegal
+	 * @return
+	 */
 	public static Medicament rechercherMedicament(String medDepotLegal) {
 		Medicament unMedicament = null;
 		try {

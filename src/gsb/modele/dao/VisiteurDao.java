@@ -8,6 +8,11 @@ import gsb.modele.Visite;
 import gsb.modele.Visiteur;
 
 public class VisiteurDao {
+    /**
+     *
+     * @param codeVisiteur
+     * @return
+     */
 	public static Visiteur rechercher(String codeVisiteur){
         Visiteur unVisiteur = null;
         ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITEUR where MATRICULE ='"+codeVisiteur+"'");
@@ -25,6 +30,10 @@ public class VisiteurDao {
         return unVisiteur;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<Visiteur> retournerLesVisiteurs(){
         ArrayList<Visiteur> lesVisites = new ArrayList<Visiteur>();
 

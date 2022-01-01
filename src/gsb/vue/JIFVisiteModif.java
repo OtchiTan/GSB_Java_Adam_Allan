@@ -47,7 +47,12 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener{
 	protected JButton JBvalide;
 
 	protected Visite visite;
-	
+
+	/**
+	 *
+	 * @param fenetreContainer
+	 * @param visite
+	 */
 	public JIFVisiteModif(MenuPrincipal fenetreContainer, Visite visite) {
 		
 		p = new JPanel(new GridLayout(7, 1));
@@ -94,6 +99,10 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener{
 		
 	}
 
+	/**
+	 *
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();

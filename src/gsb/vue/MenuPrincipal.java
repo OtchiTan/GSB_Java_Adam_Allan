@@ -43,7 +43,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	JMenu mVisites;
 
 	/**
-	 * 
+	 *
 	 */
 	public MenuPrincipal() {
 
@@ -91,6 +91,10 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	/**
+	 *
+	 * @param evt
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		// TODO Raccord de méthode auto-généré
@@ -123,6 +127,10 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 *
+	 * @param uneFenetre
+	 */
 	public void ouvrirFenetre(JInternalFrame uneFenetre) {
 		myJInternalFrame.dispose(); // si une fenêtre était dejà affichée, elle
 									// est libérée

@@ -17,6 +17,10 @@ public class JIFMedecinFiche extends JIFMedecin {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 *
+	 * @param unMedecin
+	 */
 	public JIFMedecinFiche(Medecin unMedecin) {
 		super();
 		this.remplirText(unMedecin);

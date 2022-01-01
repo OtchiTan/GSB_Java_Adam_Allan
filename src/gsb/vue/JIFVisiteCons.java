@@ -44,9 +44,14 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 	protected JButton JBoffres;
 
 	protected Visite visite;
-	
+
+	/**
+	 *
+	 * @param uneFenetreContainer
+	 * @param visite
+	 */
 	public JIFVisiteCons(MenuPrincipal uneFenetreContainer, Visite visite) {
-		
+
 		p = new JPanel(new GridLayout(7, 1));
 
 		fenetreContainer = uneFenetreContainer;
@@ -95,6 +100,10 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 		contentPane.add(p);
 	}
 
+	/**
+	 *
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();

@@ -30,6 +30,9 @@ public class JIFMedicamentAjout extends JInternalFrame implements ActionListener
 	protected JTextField JTfamLibelle;
 	protected JButton JBajout;
 
+	/**
+	 *
+	 */
 	public JIFMedicamentAjout() {
 		p = new JPanel(new GridLayout(7, 1));
 
@@ -70,6 +73,10 @@ public class JIFMedicamentAjout extends JInternalFrame implements ActionListener
 		contentPane.add(p);
 	}
 
+	/**
+	 *
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

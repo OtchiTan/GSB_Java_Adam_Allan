@@ -36,6 +36,9 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 
 	protected JButton JBajout;
 
+	/**
+	 *
+	 */
 	public JIFVisiteAjout() {
 		p = new JPanel(new GridLayout(6, 1));
 
@@ -83,6 +86,10 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 		contentPane.add(p);
 	}
 
+	/**
+	 *
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();

@@ -5,6 +5,11 @@ import java.util.TreeMap;
 import gsb.modele.Visite;
 
 public class VisiteDao {
+	/**
+	 *
+	 * @param uneVisite
+	 * @return
+	 */
 	public static int creer(Visite uneVisite) {
 		int result = 0;
 		String requeteInsertion;
@@ -24,6 +29,11 @@ public class VisiteDao {
 		return result;
 	}
 
+	/**
+	 *
+	 * @param reference
+	 * @return
+	 */
 	public static Visite rechercher(String reference) {
 		Visite uneVisite = null;
 		ResultSet reqSelection = ConnexionMySql
@@ -42,7 +52,11 @@ public class VisiteDao {
 		ConnexionMySql.fermerConnexionBd();
 		return uneVisite;
 	}
-	
+
+	/**
+	 *
+	 * @return
+	 */
 	public static TreeMap<String, Visite> retournerLesVisites(){
 		TreeMap<String, Visite> lesVisites = new TreeMap<String,Visite>();
 		
@@ -59,7 +73,12 @@ public class VisiteDao {
 		
 		return lesVisites;
 	}
-	
+
+	/**
+	 *
+	 * @param visite
+	 * @return
+	 */
 	public static int modifierVisite(Visite visite) {
 		int result = 0;
 		
@@ -74,6 +93,11 @@ public class VisiteDao {
 		return result;
 	}
 
+	/**
+	 *
+	 * @param matricule
+	 * @return
+	 */
 	public static TreeMap<String,Visite> rechercherParVisiteur(String matricule) {
 		TreeMap<String,Visite> visites = new TreeMap<String,Visite>();
 		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE where MATRICULE like '%" + matricule + "%'");
@@ -89,6 +113,11 @@ public class VisiteDao {
 		return visites;
 	}
 
+	/**
+	 *
+	 * @param date
+	 * @return
+	 */
 	public static TreeMap<String,Visite> rechercherParDate(String date) {
 		TreeMap<String,Visite> visites = new TreeMap<String,Visite>();
 		ResultSet reqSelection = ConnexionMySql.execReqSelection("SELECT * FROM VISITE WHERE DATEVISITE LIKE '%"+date+"%'");

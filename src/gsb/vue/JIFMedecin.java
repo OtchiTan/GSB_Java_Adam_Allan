@@ -46,6 +46,9 @@ public class JIFMedecin extends JInternalFrame {
 	protected JTextField JTpotentiel;
 	protected JTextField JTspecialite;
 
+	/**
+	 *
+	 */
 	public JIFMedecin() {
 		p = new JPanel(); // panneau principal de la fenêtre
 		pBoutons = new JPanel(); // panneau supportant les boutons
@@ -100,6 +103,10 @@ public class JIFMedecin extends JInternalFrame {
 
 	}
 
+	/**
+	 *
+	 * @param unMedecin
+	 */
 	public void remplirText(Medecin unMedecin) { // méthode qui permet de remplir les zones de texte à partir des
 													// valeurs passées en paramètres
 		JTcode.setText(unMedecin.getCodeMed());
@@ -113,6 +120,9 @@ public class JIFMedecin extends JInternalFrame {
 		JTspecialite.setText(unMedecin.getSpecialite());
 	}
 
+	/**
+	 *
+	 */
 	public void viderText() { // méthode qui permet de vider les zones de texte
 		JTcode.setText("");
 		JTnom.setText("");

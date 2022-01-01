@@ -35,6 +35,9 @@ public class JIFMedecinCons extends JIFMedecin implements ActionListener {
 	private ArrayList<Medecin> lesMedecins;
 	private int indiceEnCours;
 
+	/**
+	 *
+	 */
 	public JIFMedecinCons() {
 		super();
 		premier = new JButton("Premier");
@@ -70,6 +73,10 @@ public class JIFMedecinCons extends JIFMedecin implements ActionListener {
 		});
 	}
 
+	/**
+	 *
+	 * @param evt
+	 */
 	public void actionPerformed(ActionEvent evt) {
 		Object source = evt.getSource();
 		if (source == premier) {

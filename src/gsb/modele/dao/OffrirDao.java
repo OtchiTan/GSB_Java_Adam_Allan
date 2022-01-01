@@ -9,6 +9,11 @@ import gsb.modele.Offrir;
 import gsb.modele.Visite;
 
 public class OffrirDao {
+	/**
+	 *
+	 * @param offre
+	 * @return
+	 */
 	public static int creer(Offrir offre) {
 		int result = 0;
 		String requeteInsertion;
@@ -25,6 +30,11 @@ public class OffrirDao {
 		return result;
 	}
 
+	/**
+	 *
+	 * @param reference
+	 * @return
+	 */
 	public static Offrir[] rertournerOffre(String reference){
 		Offrir[] lesOffres = {null,null};
 		
@@ -45,7 +55,12 @@ public class OffrirDao {
 		
 		return lesOffres;
 	}
-	
+
+	/**
+	 *
+	 * @param offre
+	 * @return
+	 */
 	public static int modifier(Offrir offre) {
 		int result = 0;
 		String requeteInsertion;

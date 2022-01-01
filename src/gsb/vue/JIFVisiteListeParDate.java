@@ -33,6 +33,11 @@ public class JIFVisiteListeParDate extends JInternalFrame implements ActionListe
 	protected JButton JBvisite;
 	protected JTable JTliste;
 
+	/**
+	 *
+	 * @param uneFenetreContainer
+	 * @param date
+	 */
 	public JIFVisiteListeParDate(MenuPrincipal uneFenetreContainer, String date) {
 		
 		fenetreContainer = uneFenetreContainer;
@@ -90,6 +95,10 @@ public class JIFVisiteListeParDate extends JInternalFrame implements ActionListe
 		contentPane.add(p);
 	}
 
+	/**
+	 *
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
@@ -104,6 +113,10 @@ public class JIFVisiteListeParDate extends JInternalFrame implements ActionListe
 		}
 	}
 
+	/**
+	 *
+	 * @param e
+	 */
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		String reference = JTliste.getValueAt(JTliste.getSelectedRow(),0).toString();

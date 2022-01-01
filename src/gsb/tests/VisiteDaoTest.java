@@ -1,76 +1,53 @@
-/**
- * 
- */
 package gsb.tests;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import gsb.modele.Medecin;
+import gsb.modele.Visite;
+import gsb.modele.Visiteur;
+import gsb.modele.dao.MedecinDao;
+import gsb.modele.dao.VisiteDao;
+import gsb.modele.dao.VisiteurDao;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * @author adamg
- *
- */
-class VisiteDaoTest extends TestCase {
+class VisiteDaoTest {
 
-	@BeforeEach
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+    private Visite visite;
 
-	@AfterEach
-	protected void tearDown() throws Exception {
-		super.tearDown();
-	}
+    @org.junit.jupiter.api.BeforeEach
+    void setUp() {
+        Medecin medecin = MedecinDao.rechercher("m001");
+        Visiteur visiteur = VisiteurDao.rechercher("a131");
+        visite = new Visite("v0026","2021-12-27","",medecin,visiteur);
+    }
 
-	/**
-	 * Test method for {@link gsb.modele.dao.VisiteDao#creer(gsb.modele.Visite)}.
-	 */
-	@Test
-	void testCreer() {
-		fail("Not yet implemented");
-	}
+    @org.junit.jupiter.api.Test
+    void creer() {
+        assertEquals(1, VisiteDao.creer(visite));
+    }
 
-	/**
-	 * Test method for {@link gsb.modele.dao.VisiteDao#rechercher(java.lang.String)}.
-	 */
-	@Test
-	void testRechercher() {
-		fail("Not yet implemented");
-	}
+    @org.junit.jupiter.api.Test
+    void rechercher() {
+        assertEquals(visite.getReference(),VisiteDao.rechercher("v0026").getReference());
+    }
 
-	/**
-	 * Test method for {@link gsb.modele.dao.VisiteDao#retournerLesVisites()}.
-	 */
-	@Test
-	void testRetournerLesVisites() {
-		fail("Not yet implemented");
-	}
+    @org.junit.jupiter.api.Test
+    void retournerLesVisites() {
+        assertEquals(25,VisiteDao.retournerLesVisites().size());
+    }
 
-	/**
-	 * Test method for {@link gsb.modele.dao.VisiteDao#modifierVisite(gsb.modele.Visite)}.
-	 */
-	@Test
-	void testModifierVisite() {
-		fail("Not yet implemented");
-	}
+    @org.junit.jupiter.api.Test
+    void modifierVisite() {
+        visite.setCommentaire("Test");
+        assertEquals(1,VisiteDao.modifierVisite(visite));
+    }
 
-	/**
-	 * Test method for {@link gsb.modele.dao.VisiteDao#rechercherParVisiteur(java.lang.String)}.
-	 */
-	@Test
-	void testRechercherParVisiteur() {
-		fail("Not yet implemented");
-	}
+    @org.junit.jupiter.api.Test
+    void rechercherParVisiteur() {
+        assertEquals(2,VisiteDao.rechercherParVisiteur("a131").size());
+    }
 
-	/**
-	 * Test method for {@link gsb.modele.dao.VisiteDao#rechercherParDate(java.lang.String)}.
-	 */
-	@Test
-	void testRechercherParDate() {
-		fail("Not yet implemented");
-	}
-
+    @org.junit.jupiter.api.Test
+    void rechercherParDate() {
+        assertEquals(1,VisiteDao.rechercherParDate("2021-12-27").size());
+    }
 }

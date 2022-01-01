@@ -40,6 +40,10 @@ public class JIFMedecinListeCol extends JInternalFrame implements ActionListener
 	protected JButton JBafficherFiche;
 	protected MenuPrincipal fenetreContainer;
 
+	/**
+	 *
+	 * @param uneFenetreContainer
+	 */
 	public JIFMedecinListeCol(MenuPrincipal uneFenetreContainer) {
 
 		fenetreContainer = uneFenetreContainer;
@@ -82,11 +86,9 @@ public class JIFMedecinListeCol extends JInternalFrame implements ActionListener
 		contentPane.add(p);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	/**
+	 *
+	 * @param arg0
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

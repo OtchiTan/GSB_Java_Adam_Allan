@@ -39,6 +39,11 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
 
     protected Visite visite;
 
+    /**
+     *
+     * @param uneFenetreContainer
+     * @param visite
+     */
     public JIFGestionOffre(MenuPrincipal uneFenetreContainer, Visite visite) {
 
         fenetreContainer = uneFenetreContainer;
@@ -109,6 +114,10 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
         contentPane.add(p);
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
@@ -143,6 +152,11 @@ public class JIFGestionOffre extends JInternalFrame implements ActionListener {
         }
     }
 
+    /**
+     *
+     * @param rowNumber
+     * @return
+     */
     private boolean validOffre ( int rowNumber){
         if (JTliste.getValueAt(rowNumber, 0) == null) return false;
         if (JTliste.getValueAt(rowNumber, 1) == null) return false;

@@ -37,7 +37,11 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener, Li
 	
 	protected JButton JBvisite;
 	protected JTable JTliste;
-	
+
+	/**
+	 *
+	 * @param uneFenetreContainer
+	 */
 	public JIFVisiteListe(MenuPrincipal uneFenetreContainer) {
 		
 		fenetreContainer = uneFenetreContainer;
@@ -94,7 +98,11 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener, Li
 		Container contentPane = getContentPane();
 		contentPane.add(p);
 	}
-	
+
+	/**
+	 *
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
@@ -109,6 +117,10 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener, Li
 		}
 	}
 
+	/**
+	 *
+	 * @param e
+	 */
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		String reference = JTliste.getValueAt(JTliste.getSelectedRow(),0).toString();

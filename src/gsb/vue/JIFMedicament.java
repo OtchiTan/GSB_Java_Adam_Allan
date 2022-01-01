@@ -47,6 +47,9 @@ public class JIFMedicament extends JInternalFrame {
 	protected JTextField JTmedComposition;
 	protected JTextField JTmedEffets;
 
+	/**
+	 *
+	 */
 	public JIFMedicament() {
 		p = new JPanel(new GridLayout(6,1)); // panneau principal de la fenêtre
 
@@ -84,6 +87,10 @@ public class JIFMedicament extends JInternalFrame {
 		contentPane.add(p);
 	}
 
+	/**
+	 *
+	 * @param unMedicament
+	 */
 	public void remplirText(Medicament unMedicament) { // méthode qui permet de remplir les zones de texte à partir des
 													// valeurs passées en paramètres
 		JTmedDepotLegal.setText(unMedicament.getMedDepotLegal());
@@ -94,6 +101,9 @@ public class JIFMedicament extends JInternalFrame {
 		JTfamLibelle.setText(unMedicament.getFamLibelle());
 	}
 
+	/**
+	 *
+	 */
 	public void viderText() { // méthode qui permet de vider les zones de texte
 		JTmedDepotLegal.setText("");
 		JTnomCommercial.setText("");

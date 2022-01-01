@@ -51,6 +51,10 @@ public class JIFMedecinListeDic extends JInternalFrame implements ActionListener
 	protected MenuPrincipal fenetreContainer;
 	protected JTable table;
 
+	/**
+	 *
+	 * @param uneFenetreContainer
+	 */
 	public JIFMedecinListeDic(MenuPrincipal uneFenetreContainer) {
 
 		fenetreContainer = uneFenetreContainer;
@@ -96,11 +100,9 @@ public class JIFMedecinListeDic extends JInternalFrame implements ActionListener
 		contentPane.add(p);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	/**
+	 *
+	 * @param arg0
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

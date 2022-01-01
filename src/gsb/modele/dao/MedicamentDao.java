@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MedicamentDao {
-
+	/**
+	 *
+	 * @param medDepotLegal
+	 * @return
+	 */
 	public static Medicament rechercher(String medDepotLegal) {
 
 		Medicament unMedicament = null;
@@ -30,6 +34,10 @@ public class MedicamentDao {
 		return unMedicament;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public static ArrayList<Medicament> retournerCollectionDesMedicaments() {
 		ArrayList<Medicament> collectionDesMedicaments = new ArrayList<Medicament>();
 		ResultSet reqSelection = ConnexionMySql.execReqSelection("select MED_DEPOTLEGAL from MEDICAMENT");
@@ -45,6 +53,10 @@ public class MedicamentDao {
 		return collectionDesMedicaments;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public static HashMap<String, Medicament> retournerDictionnaireDesMedicaments() {
 		HashMap<String, Medicament> diccoDesMedicaments = new HashMap<String, Medicament>();
 		ResultSet reqSelection = ConnexionMySql.execReqSelection("select MED_DEPOTLEGAL from MEDICAMENT");

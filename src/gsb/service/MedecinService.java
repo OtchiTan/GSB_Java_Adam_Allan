@@ -9,7 +9,11 @@ import gsb.modele.dao.MedecinDao;
  *         code - Modèles de code
  */
 public class MedecinService {
-
+	/**
+	 *
+	 * @param unCodeMedecin
+	 * @return
+	 */
 	public static Medecin rechercherMedecin(String unCodeMedecin) {
 		Medecin unMedecin = null;
 		try {

@@ -16,7 +16,11 @@ import java.sql.ResultSet;
  *         code - Modèles de code
  */
 public class LocaliteDao {
-
+	/**
+	 *
+	 * @param codeLocalite
+	 * @return
+	 */
 	public static Localite rechercher(String codeLocalite) {
 		Localite uneLocalite = null;
 		ResultSet reqSelection = ConnexionMySql
